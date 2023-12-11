@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='media/icon.ico' ) }}" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-slate-950">
+
+
+    <div class="">
+        <h1 class="text-2xl sm:text-4xl md:text-6xl text-center text-white font-bold pt-5 pb-3">Empleados</h1>
+        <p class="font-semibold text-right pr-3 pb-7 text-gray-200"><a href="{{url_for('empleados.registro')}}">Añadir
+                Empleado</a></p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 px-3">
+        {% for empleado in empleados %}
+        <div
+            class="ml-3 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div class="flex flex-col items-center pt-4 pb-4">
+                <img class="w-24 h-24 mb-3 rounded-full shadow-lg"
+                    src="{{empleado.url_foto}}" alt="{{ empleado.nombre }}" />
+                <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ empleado.nombre}}</h5>
+                <span class="text-sm text-gray-500 dark:text-gray-400">{{ empleado.puesto}}</span>
+                <div class="flex mt-4 md:mt-6">
+                    <a href="{{ url_for('empleados.editar', id = empleado.id)}}"
+                        class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Editar</a>
+                    <a href="{{ url_for('empleados.eliminar', id = empleado.id)}}"
+                        class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-red-700 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-red-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 ms-3">Eliminar</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</body>
+
+</html>
